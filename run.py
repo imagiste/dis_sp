@@ -7,7 +7,7 @@ def get_html(url):
     html = page.text
     soup = BeautifulSoup(html)
     table = soup.select("tbody[id]")
-    table = list(filter(lambda x:x!=[],table))
+    #table = list(filter(lambda x:x.select(".new a.s.xst")!=[],table))
     result_list = []
         
 
@@ -19,8 +19,7 @@ def get_html(url):
             title_id = title[0]['href'].split('-')[1]
             auth = i.select("cite a")[0]['href'].split('=')[-1]
             result_list.append("%s,%s,%s"%(title_name,title_id,auth))
-    
-    print(result_list)
+   
     return result_list 
 
 
@@ -42,7 +41,6 @@ if __name__ == '__main__':
     url = "https://www.discuz.net/forum-10-1.html"
 
     write_file(get_html(url))
-    #write_file(range(10))
     while get_nxt(url):
         url = get_nxt(url)
         print(url)
